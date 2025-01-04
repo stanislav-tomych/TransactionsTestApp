@@ -23,6 +23,9 @@
 		758703842D29611E00FC4A6B /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7587037D2D29569600FC4A6B /* AppCoordinator.swift */; };
 		758703852D29611E00FC4A6B /* TransactionsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758703812D2956D600FC4A6B /* TransactionsCoordinator.swift */; };
 		758703862D29611E00FC4A6B /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7587037F2D2956AB00FC4A6B /* Coordinator.swift */; };
+		7587038A2D296D1700FC4A6B /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758703892D296D1300FC4A6B /* Transaction.swift */; };
+		7587038C2D296DDC00FC4A6B /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7587038B2D296DD700FC4A6B /* StorageService.swift */; };
+		7587038E2D296E0600FC4A6B /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7587038D2D296DFF00FC4A6B /* PersistenceService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +66,9 @@
 		7587037D2D29569600FC4A6B /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		7587037F2D2956AB00FC4A6B /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		758703812D2956D600FC4A6B /* TransactionsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsCoordinator.swift; sourceTree = "<group>"; };
+		758703892D296D1300FC4A6B /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		7587038B2D296DD700FC4A6B /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		7587038D2D296DFF00FC4A6B /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,9 +146,9 @@
 		1CA3B6542D22B0F500176711 /* TransactionsTestTask */ = {
 			isa = PBXGroup;
 			children = (
+				758703872D29685700FC4A6B /* Storage */,
 				7587037C2D29567300FC4A6B /* Coordinators */,
 				7587037A2D29529100FC4A6B /* Network */,
-				758703792D29524A00FC4A6B /* Persistence */,
 				758703782D29524300FC4A6B /* Networking */,
 				758703772D29523100FC4A6B /* Models */,
 				758703762D29522600FC4A6B /* Modules */,
@@ -177,6 +183,7 @@
 		758703772D29523100FC4A6B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				758703892D296D1300FC4A6B /* Transaction.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -191,6 +198,7 @@
 		758703792D29524A00FC4A6B /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
+				7587038D2D296DFF00FC4A6B /* PersistenceService.swift */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -218,6 +226,15 @@
 				7587037D2D29569600FC4A6B /* AppCoordinator.swift */,
 			);
 			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		758703872D29685700FC4A6B /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				7587038B2D296DD700FC4A6B /* StorageService.swift */,
+				758703792D29524A00FC4A6B /* Persistence */,
+			);
+			path = Storage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -356,13 +373,16 @@
 				0DF1D1452D22DD06001626E7 /* BitcoinRateService.swift in Sources */,
 				0DF1D1472D22DD4A001626E7 /* AnalyticsService.swift in Sources */,
 				1CA3B65A2D22B0F500176711 /* TransactionsViewController.swift in Sources */,
+				7587038A2D296D1700FC4A6B /* Transaction.swift in Sources */,
 				1CA3B6562D22B0F500176711 /* AppDelegate.swift in Sources */,
 				1CA3B6582D22B0F500176711 /* SceneDelegate.swift in Sources */,
 				758703842D29611E00FC4A6B /* AppCoordinator.swift in Sources */,
 				758703852D29611E00FC4A6B /* TransactionsCoordinator.swift in Sources */,
+				7587038E2D296E0600FC4A6B /* PersistenceService.swift in Sources */,
 				758703862D29611E00FC4A6B /* Coordinator.swift in Sources */,
 				1CA3B6602D22B0F500176711 /* TransactionsTestTask.xcdatamodeld in Sources */,
 				0DF1D1402D22DC51001626E7 /* ServicesAssembler.swift in Sources */,
+				7587038C2D296DDC00FC4A6B /* StorageService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

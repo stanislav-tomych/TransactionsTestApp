@@ -39,6 +39,12 @@ class TransactionsViewController: UIViewController {
         setupUI()
         setupConstraints()
         setupActions()
+        let service = PersistenceService()
+        service.saveTransaction(Transaction(id: UUID(), date: .now, amount: 1, category: .electronics, type: .expense))
+        service.saveTransaction(Transaction(id: UUID(), date: .now, amount: 1, category: .electronics, type: .expense))
+
+        let transactions = service.fetchTransactions()
+        print(transactions)
     }
     
     private func setupUI() {
