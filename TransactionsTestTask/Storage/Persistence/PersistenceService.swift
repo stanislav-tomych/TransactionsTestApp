@@ -7,7 +7,7 @@
 
 import CoreData
 
-class PersistenceService: StorageService {
+class PersistenceService: DataService {
     private enum Keys {
         static let balanceEntity = "BalanceEntity"
         static let transactionEntity = "TransactionEntity"

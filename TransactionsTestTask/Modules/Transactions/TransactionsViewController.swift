@@ -7,7 +7,8 @@
 import UIKit
 
 class TransactionsViewController: UIViewController {
-
+    private let viewModel: TransactionsViewModel
+    
     private let balanceLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
@@ -33,16 +34,23 @@ class TransactionsViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
-
+    
+    init(viewModel: TransactionsViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupConstraints()
         setupActions()
+        
         let service = PersistenceService()
-        service.saveTransaction(Transaction(id: UUID(), date: .now, amount: 1, category: .electronics, type: .expense))
-        service.saveTransaction(Transaction(id: UUID(), date: .now, amount: 1, category: .electronics, type: .expense))
-
         let transactions = service.fetchTransactions()
         print(transactions)
     }
@@ -89,6 +97,7 @@ class TransactionsViewController: UIViewController {
     }
 
     @objc private func addTransactionTapped() {
+        viewModel.handleAddTransactionButtonTapped()
     }
 }
 

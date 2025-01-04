@@ -24,8 +24,12 @@
 		758703852D29611E00FC4A6B /* TransactionsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758703812D2956D600FC4A6B /* TransactionsCoordinator.swift */; };
 		758703862D29611E00FC4A6B /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7587037F2D2956AB00FC4A6B /* Coordinator.swift */; };
 		7587038A2D296D1700FC4A6B /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758703892D296D1300FC4A6B /* Transaction.swift */; };
-		7587038C2D296DDC00FC4A6B /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7587038B2D296DD700FC4A6B /* StorageService.swift */; };
+		7587038C2D296DDC00FC4A6B /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7587038B2D296DD700FC4A6B /* DataService.swift */; };
 		7587038E2D296E0600FC4A6B /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7587038D2D296DFF00FC4A6B /* PersistenceService.swift */; };
+		758703912D29818600FC4A6B /* AddTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758703902D29818000FC4A6B /* AddTransactionViewController.swift */; };
+		758703932D29821A00FC4A6B /* AddTransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758703922D29821800FC4A6B /* AddTransactionViewModel.swift */; };
+		758703952D29871C00FC4A6B /* TransactionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758703942D29871800FC4A6B /* TransactionsViewModel.swift */; };
+		758703992D29948600FC4A6B /* UITextField+Publishers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758703982D29947300FC4A6B /* UITextField+Publishers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,8 +71,12 @@
 		7587037F2D2956AB00FC4A6B /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		758703812D2956D600FC4A6B /* TransactionsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsCoordinator.swift; sourceTree = "<group>"; };
 		758703892D296D1300FC4A6B /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
-		7587038B2D296DD700FC4A6B /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		7587038B2D296DD700FC4A6B /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		7587038D2D296DFF00FC4A6B /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
+		758703902D29818000FC4A6B /* AddTransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionViewController.swift; sourceTree = "<group>"; };
+		758703922D29821800FC4A6B /* AddTransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionViewModel.swift; sourceTree = "<group>"; };
+		758703942D29871800FC4A6B /* TransactionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsViewModel.swift; sourceTree = "<group>"; };
+		758703982D29947300FC4A6B /* UITextField+Publishers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Publishers.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,10 +154,10 @@
 		1CA3B6542D22B0F500176711 /* TransactionsTestTask */ = {
 			isa = PBXGroup;
 			children = (
+				758703962D29946600FC4A6B /* Helpers */,
 				758703872D29685700FC4A6B /* Storage */,
 				7587037C2D29567300FC4A6B /* Coordinators */,
-				7587037A2D29529100FC4A6B /* Network */,
-				758703782D29524300FC4A6B /* Networking */,
+				7587037A2D29529100FC4A6B /* Networking */,
 				758703772D29523100FC4A6B /* Models */,
 				758703762D29522600FC4A6B /* Modules */,
 				0DF1D13E2D22DC2D001626E7 /* Services */,
@@ -175,6 +183,7 @@
 		758703762D29522600FC4A6B /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				7587038F2D29817300FC4A6B /* AddTransaction */,
 				7587037B2D29559900FC4A6B /* Transactions */,
 			);
 			path = Modules;
@@ -188,13 +197,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		758703782D29524300FC4A6B /* Networking */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Networking;
-			sourceTree = "<group>";
-		};
 		758703792D29524A00FC4A6B /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
@@ -203,16 +205,17 @@
 			path = Persistence;
 			sourceTree = "<group>";
 		};
-		7587037A2D29529100FC4A6B /* Network */ = {
+		7587037A2D29529100FC4A6B /* Networking */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = Network;
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		7587037B2D29559900FC4A6B /* Transactions */ = {
 			isa = PBXGroup;
 			children = (
+				758703942D29871800FC4A6B /* TransactionsViewModel.swift */,
 				1CA3B6592D22B0F500176711 /* TransactionsViewController.swift */,
 			);
 			path = Transactions;
@@ -231,10 +234,35 @@
 		758703872D29685700FC4A6B /* Storage */ = {
 			isa = PBXGroup;
 			children = (
-				7587038B2D296DD700FC4A6B /* StorageService.swift */,
+				7587038B2D296DD700FC4A6B /* DataService.swift */,
 				758703792D29524A00FC4A6B /* Persistence */,
 			);
 			path = Storage;
+			sourceTree = "<group>";
+		};
+		7587038F2D29817300FC4A6B /* AddTransaction */ = {
+			isa = PBXGroup;
+			children = (
+				758703922D29821800FC4A6B /* AddTransactionViewModel.swift */,
+				758703902D29818000FC4A6B /* AddTransactionViewController.swift */,
+			);
+			path = AddTransaction;
+			sourceTree = "<group>";
+		};
+		758703962D29946600FC4A6B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				758703972D29946D00FC4A6B /* Extensions */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		758703972D29946D00FC4A6B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				758703982D29947300FC4A6B /* UITextField+Publishers.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -369,12 +397,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D1540612D22EF5D00D6D63F /* AnalyticsEvent.swift in Sources */,
+				758703952D29871C00FC4A6B /* TransactionsViewModel.swift in Sources */,
 				0DF1D1432D22DCD8001626E7 /* PerformOnce.swift in Sources */,
+				758703992D29948600FC4A6B /* UITextField+Publishers.swift in Sources */,
 				0DF1D1452D22DD06001626E7 /* BitcoinRateService.swift in Sources */,
 				0DF1D1472D22DD4A001626E7 /* AnalyticsService.swift in Sources */,
 				1CA3B65A2D22B0F500176711 /* TransactionsViewController.swift in Sources */,
 				7587038A2D296D1700FC4A6B /* Transaction.swift in Sources */,
 				1CA3B6562D22B0F500176711 /* AppDelegate.swift in Sources */,
+				758703912D29818600FC4A6B /* AddTransactionViewController.swift in Sources */,
+				758703932D29821A00FC4A6B /* AddTransactionViewModel.swift in Sources */,
 				1CA3B6582D22B0F500176711 /* SceneDelegate.swift in Sources */,
 				758703842D29611E00FC4A6B /* AppCoordinator.swift in Sources */,
 				758703852D29611E00FC4A6B /* TransactionsCoordinator.swift in Sources */,
@@ -382,7 +414,7 @@
 				758703862D29611E00FC4A6B /* Coordinator.swift in Sources */,
 				1CA3B6602D22B0F500176711 /* TransactionsTestTask.xcdatamodeld in Sources */,
 				0DF1D1402D22DC51001626E7 /* ServicesAssembler.swift in Sources */,
-				7587038C2D296DDC00FC4A6B /* StorageService.swift in Sources */,
+				7587038C2D296DDC00FC4A6B /* DataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

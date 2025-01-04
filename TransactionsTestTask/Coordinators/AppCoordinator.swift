@@ -10,7 +10,9 @@ import UIKit
 class AppCoordinator: Coordinator {
     private let window: UIWindow
     private var navigationController: UINavigationController?
-
+    private var dataService: DataService = PersistenceService()
+    private var transactionsCoordinator: TransactionsCoordinator?
+    
     init(window: UIWindow) {
         self.window = window
     }
@@ -21,7 +23,8 @@ class AppCoordinator: Coordinator {
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
 
-        let transactionsCoordinator = TransactionsCoordinator(navigationController: navigationController)
+        let transactionsCoordinator = TransactionsCoordinator(navigationController: navigationController, dataService: dataService)
+        self.transactionsCoordinator = transactionsCoordinator
         transactionsCoordinator.start()
     }
 }
