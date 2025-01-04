@@ -16,7 +16,7 @@ class AddTransactionViewController: UIViewController {
     
     private let amountTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Enter amount"
+        textField.placeholder = Localization.AddTransactions.enterAmount
         textField.borderStyle = .roundedRect
         textField.keyboardType = .decimalPad
         return textField
@@ -26,7 +26,7 @@ class AddTransactionViewController: UIViewController {
 
     private let addButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Add", for: .normal)
+        button.setTitle(Localization.AddTransactions.addButtonTitle, for: .normal)
         return button
     }()
 
@@ -47,6 +47,7 @@ class AddTransactionViewController: UIViewController {
     }
 
     private func setupUI() {
+        title = Localization.AddTransactions.navigationTitle
         view.backgroundColor = .white
         view.addSubview(amountTextField)
         view.addSubview(categoryPicker)
@@ -57,15 +58,15 @@ class AddTransactionViewController: UIViewController {
         addButton.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            amountTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            amountTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            amountTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            amountTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.spacing),
+            amountTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.spacing),
+            amountTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.spacing),
 
-            categoryPicker.topAnchor.constraint(equalTo: amountTextField.bottomAnchor, constant: 20),
-            categoryPicker.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            categoryPicker.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            categoryPicker.topAnchor.constraint(equalTo: amountTextField.bottomAnchor, constant: Constants.spacing),
+            categoryPicker.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.spacing),
+            categoryPicker.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.spacing),
 
-            addButton.topAnchor.constraint(equalTo: categoryPicker.bottomAnchor, constant: 20),
+            addButton.topAnchor.constraint(equalTo: categoryPicker.bottomAnchor, constant: Constants.spacing),
             addButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
@@ -93,6 +94,10 @@ class AddTransactionViewController: UIViewController {
         guard let amountText = amountTextField.text, let amount = Double(amountText) else { return }
         viewModel.addTransaction(amount: amount, selectedCategory: selectedCategory)
     }
+    
+    private enum Constants {
+        static let spacing: CGFloat = 20
+    }
 }
 
 extension AddTransactionViewController: UIPickerViewDelegate, UIPickerViewDataSource {
@@ -105,7 +110,7 @@ extension AddTransactionViewController: UIPickerViewDelegate, UIPickerViewDataSo
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return "\(TransactionCategory.allCases[row])"
+        return "\(TransactionCategory.allCases[row].toString())"
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {

@@ -13,6 +13,21 @@ enum TransactionCategory: Int16, CaseIterable, Codable {
     case electronics = 2
     case restaurant = 3
     case other = 4
+    
+    func toString() -> String {
+        switch self {
+        case .groceries:
+            Localization.TransactionTypes.groceries
+        case .taxi:
+            Localization.TransactionTypes.taxi
+        case .electronics:
+            Localization.TransactionTypes.electronics
+        case .restaurant:
+            Localization.TransactionTypes.restaurant
+        case .other:
+            Localization.TransactionTypes.other
+        }
+    }
 }
 
 enum TransactionType: Int16, Codable {
