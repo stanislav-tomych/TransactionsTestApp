@@ -14,12 +14,15 @@
 		0DF1D1472D22DD4A001626E7 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF1D1462D22DD44001626E7 /* AnalyticsService.swift */; };
 		1CA3B6562D22B0F500176711 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA3B6552D22B0F500176711 /* AppDelegate.swift */; };
 		1CA3B6582D22B0F500176711 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA3B6572D22B0F500176711 /* SceneDelegate.swift */; };
-		1CA3B65A2D22B0F500176711 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA3B6592D22B0F500176711 /* ViewController.swift */; };
+		1CA3B65A2D22B0F500176711 /* TransactionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA3B6592D22B0F500176711 /* TransactionsViewController.swift */; };
 		1CA3B65D2D22B0F500176711 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 1CA3B65C2D22B0F500176711 /* Base */; };
 		1CA3B6602D22B0F500176711 /* TransactionsTestTask.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1CA3B65E2D22B0F500176711 /* TransactionsTestTask.xcdatamodeld */; };
 		1CA3B6622D22B0F600176711 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CA3B6612D22B0F600176711 /* Assets.xcassets */; };
 		1CA3B6652D22B0F600176711 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 1CA3B6642D22B0F600176711 /* Base */; };
 		1CA3B6702D22B0F600176711 /* TransactionsTestTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA3B66F2D22B0F600176711 /* TransactionsTestTaskTests.swift */; };
+		758703842D29611E00FC4A6B /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7587037D2D29569600FC4A6B /* AppCoordinator.swift */; };
+		758703852D29611E00FC4A6B /* TransactionsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758703812D2956D600FC4A6B /* TransactionsCoordinator.swift */; };
+		758703862D29611E00FC4A6B /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7587037F2D2956AB00FC4A6B /* Coordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,7 +51,7 @@
 		1CA3B6522D22B0F500176711 /* TransactionsTestTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TransactionsTestTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CA3B6552D22B0F500176711 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1CA3B6572D22B0F500176711 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		1CA3B6592D22B0F500176711 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1CA3B6592D22B0F500176711 /* TransactionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsViewController.swift; sourceTree = "<group>"; };
 		1CA3B65C2D22B0F500176711 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1CA3B65F2D22B0F500176711 /* TransactionsTestTask.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TransactionsTestTask.xcdatamodel; sourceTree = "<group>"; };
 		1CA3B6612D22B0F600176711 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -57,6 +60,9 @@
 		1CA3B66B2D22B0F600176711 /* TransactionsTestTaskTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TransactionsTestTaskTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CA3B66F2D22B0F600176711 /* TransactionsTestTaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsTestTaskTests.swift; sourceTree = "<group>"; };
 		1CA3B6752D22B0F600176711 /* TransactionsTestTaskUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TransactionsTestTaskUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7587037D2D29569600FC4A6B /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		7587037F2D2956AB00FC4A6B /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		758703812D2956D600FC4A6B /* TransactionsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,10 +140,15 @@
 		1CA3B6542D22B0F500176711 /* TransactionsTestTask */ = {
 			isa = PBXGroup;
 			children = (
+				7587037C2D29567300FC4A6B /* Coordinators */,
+				7587037A2D29529100FC4A6B /* Network */,
+				758703792D29524A00FC4A6B /* Persistence */,
+				758703782D29524300FC4A6B /* Networking */,
+				758703772D29523100FC4A6B /* Models */,
+				758703762D29522600FC4A6B /* Modules */,
 				0DF1D13E2D22DC2D001626E7 /* Services */,
 				1CA3B6552D22B0F500176711 /* AppDelegate.swift */,
 				1CA3B6572D22B0F500176711 /* SceneDelegate.swift */,
-				1CA3B6592D22B0F500176711 /* ViewController.swift */,
 				1CA3B65B2D22B0F500176711 /* Main.storyboard */,
 				1CA3B6612D22B0F600176711 /* Assets.xcassets */,
 				1CA3B6632D22B0F600176711 /* LaunchScreen.storyboard */,
@@ -153,6 +164,60 @@
 				1CA3B66F2D22B0F600176711 /* TransactionsTestTaskTests.swift */,
 			);
 			path = TransactionsTestTaskTests;
+			sourceTree = "<group>";
+		};
+		758703762D29522600FC4A6B /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				7587037B2D29559900FC4A6B /* Transactions */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		758703772D29523100FC4A6B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		758703782D29524300FC4A6B /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		758703792D29524A00FC4A6B /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		7587037A2D29529100FC4A6B /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		7587037B2D29559900FC4A6B /* Transactions */ = {
+			isa = PBXGroup;
+			children = (
+				1CA3B6592D22B0F500176711 /* TransactionsViewController.swift */,
+			);
+			path = Transactions;
+			sourceTree = "<group>";
+		};
+		7587037C2D29567300FC4A6B /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				758703812D2956D600FC4A6B /* TransactionsCoordinator.swift */,
+				7587037F2D2956AB00FC4A6B /* Coordinator.swift */,
+				7587037D2D29569600FC4A6B /* AppCoordinator.swift */,
+			);
+			path = Coordinators;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,9 +355,12 @@
 				0DF1D1432D22DCD8001626E7 /* PerformOnce.swift in Sources */,
 				0DF1D1452D22DD06001626E7 /* BitcoinRateService.swift in Sources */,
 				0DF1D1472D22DD4A001626E7 /* AnalyticsService.swift in Sources */,
-				1CA3B65A2D22B0F500176711 /* ViewController.swift in Sources */,
+				1CA3B65A2D22B0F500176711 /* TransactionsViewController.swift in Sources */,
 				1CA3B6562D22B0F500176711 /* AppDelegate.swift in Sources */,
 				1CA3B6582D22B0F500176711 /* SceneDelegate.swift in Sources */,
+				758703842D29611E00FC4A6B /* AppCoordinator.swift in Sources */,
+				758703852D29611E00FC4A6B /* TransactionsCoordinator.swift in Sources */,
+				758703862D29611E00FC4A6B /* Coordinator.swift in Sources */,
 				1CA3B6602D22B0F500176711 /* TransactionsTestTask.xcdatamodeld in Sources */,
 				0DF1D1402D22DC51001626E7 /* ServicesAssembler.swift in Sources */,
 			);
