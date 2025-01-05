@@ -23,7 +23,7 @@ class AddTransactionViewModel {
         
         isAddButtonEnabled = $amountText
             .map { text in
-                guard let amount = Double(text), amount > 0 else {
+                guard text.toDouble() > 0 else {
                     return false
                 }
                 return true
@@ -35,7 +35,7 @@ class AddTransactionViewModel {
         let transaction = Transaction(
             id: UUID(),
             date: Date(),
-            amount: amount,
+            amount: -amount,
             category: selectedCategory,
             type: .expense
         )

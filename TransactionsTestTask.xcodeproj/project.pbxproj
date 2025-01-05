@@ -33,6 +33,7 @@
 		7587039B2D29993C00FC4A6B /* Localization+Transactions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7587039A2D29993B00FC4A6B /* Localization+Transactions.swift */; };
 		7587039D2D2999D700FC4A6B /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7587039C2D2999D400FC4A6B /* Localization.swift */; };
 		758703A22D299AAC00FC4A6B /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 758703A12D299AAC00FC4A6B /* Localizable.xcstrings */; };
+		758703A42D2AA79E00FC4A6B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758703A32D2AA77900FC4A6B /* String.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		7587039A2D29993B00FC4A6B /* Localization+Transactions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Localization+Transactions.swift"; sourceTree = "<group>"; };
 		7587039C2D2999D400FC4A6B /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		758703A12D299AAC00FC4A6B /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		758703A32D2AA77900FC4A6B /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,6 +269,7 @@
 		758703972D29946D00FC4A6B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				758703A32D2AA77900FC4A6B /* String.swift */,
 				758703982D29947300FC4A6B /* UITextField+Publishers.swift */,
 			);
 			path = Extensions;
@@ -426,6 +429,7 @@
 				7587038A2D296D1700FC4A6B /* Transaction.swift in Sources */,
 				1CA3B6562D22B0F500176711 /* AppDelegate.swift in Sources */,
 				758703912D29818600FC4A6B /* AddTransactionViewController.swift in Sources */,
+				758703A42D2AA79E00FC4A6B /* String.swift in Sources */,
 				758703932D29821A00FC4A6B /* AddTransactionViewModel.swift in Sources */,
 				1CA3B6582D22B0F500176711 /* SceneDelegate.swift in Sources */,
 				758703842D29611E00FC4A6B /* AppCoordinator.swift in Sources */,

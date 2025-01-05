@@ -20,7 +20,7 @@ class TransactionsCoordinator: Coordinator {
     }
 
     func start() {
-        let transactionViewModel = TransactionsViewModel { [weak self] in
+        let transactionViewModel = TransactionsViewModel(dataService: dataService) { [weak self] in
             self?.showAddTransaction()
         }
         let transactionsViewController = TransactionsViewController(viewModel: transactionViewModel)

@@ -15,7 +15,9 @@ extension Localization {
     }
     
     enum Transactions {
-        
+        static let fillBalanceTitle = NSLocalizedString("Transactions.FillBalanceAlert.Title", comment: "")
+        static let fillBalancePlaceholder = NSLocalizedString("Transactions.FillBalanceAlert.Placeholder", comment: "")
+        static let navigationTitle = NSLocalizedString("Transactions.NavigationBar.Title", comment: "")
     }
     
     enum TransactionTypes {

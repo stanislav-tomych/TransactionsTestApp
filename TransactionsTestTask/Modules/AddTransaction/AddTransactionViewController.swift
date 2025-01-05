@@ -91,7 +91,7 @@ class AddTransactionViewController: UIViewController {
     }
     
     @objc private func addTransactionTapped() {
-        guard let amountText = amountTextField.text, let amount = Double(amountText) else { return }
+        guard let amount = amountTextField.text?.toDouble(), amount > 0 else { return }
         viewModel.addTransaction(amount: amount, selectedCategory: selectedCategory)
     }
     

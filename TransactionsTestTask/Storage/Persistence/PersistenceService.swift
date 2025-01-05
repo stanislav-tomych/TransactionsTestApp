@@ -69,12 +69,7 @@ class PersistenceService: DataService {
         transactionEntity.setValue(transaction.category.rawValue, forKey: Keys.category)
         transactionEntity.setValue(transaction.type.rawValue, forKey: Keys.type)
 
-        if transaction.type == .adjunction {
-            currentBalance += transaction.amount
-        } else if transaction.type == .expense {
-            currentBalance -= transaction.amount
-        }
-
+        currentBalance += transaction.amount
         saveContext()
     }
 
