@@ -7,6 +7,6 @@
 
 protocol DataService {
     func saveTransaction(_ transaction: Transaction)
-    func fetchTransactions() -> [Transaction]
+    func fetchTransactions(offset: Int, limit: Int) -> [Transaction]
     var currentBalance: Double { get set }
 }

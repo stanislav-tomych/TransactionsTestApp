@@ -73,9 +73,12 @@ class PersistenceService: DataService {
         saveContext()
     }
 
-    func fetchTransactions() -> [Transaction] {
+    func fetchTransactions(offset: Int, limit: Int) -> [Transaction] {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: Keys.transactionEntity)
-
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: Keys.date, ascending: false)]
+        fetchRequest.fetchOffset = offset
+        fetchRequest.fetchLimit = limit
+        
         do {
             let results = try context.fetch(fetchRequest)
             return results.compactMap { object in

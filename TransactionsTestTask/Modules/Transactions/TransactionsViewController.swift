@@ -68,6 +68,7 @@ class TransactionsViewController: UIViewController {
         view.addSubview(tableView)
 
         tableView.dataSource = self
+        tableView.delegate = self
     }
 
     private func setupConstraints() {
@@ -101,11 +102,16 @@ class TransactionsViewController: UIViewController {
         viewModel.$currentBalance
             .receive(on: DispatchQueue.main)
             .sink { [weak self] balance in
-                self?.balanceLabel.text = String(format: "%.2f BTC", balance)
+                UIView.transition(with: self?.balanceLabel ?? UILabel(),
+                                  duration: 0.3,
+                                  options: .transitionCrossDissolve,
+                                  animations: {
+                    self?.balanceLabel.text = String(format: "%.2f BTC", balance)
+                }, completion: nil)
             }
             .store(in: &cancellables)
         
-        viewModel.$transactions
+        viewModel.$transactionsSections
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.tableView.reloadData()
@@ -152,17 +158,37 @@ class TransactionsViewController: UIViewController {
 }
 
 extension TransactionsViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.transactions.count
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return viewModel.transactionsSections.count
     }
 
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.transactionsSections[section].transactions.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        return formatter.string(from: viewModel.transactionsSections[section].date)
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
-        let transaction = viewModel.transactions[indexPath.row]
+        let transaction = viewModel.transactionsSections[indexPath.section].transactions[indexPath.row]
+        
         cell.textLabel?.text = "\(transaction.amount) BTC"
         cell.textLabel?.textColor = transaction.type == .adjunction ? .black : .red
         cell.detailTextLabel?.text = transaction.category.toString()
         cell.selectionStyle = .none
         return cell
+    }
+}
+
+extension TransactionsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let section = viewModel.transactionsSections[indexPath.section]
+        if indexPath.row == section.transactions.count - 1 && indexPath.section == viewModel.transactionsSections.count - 1 {
+            viewModel.fetchTransactions()
+        }
     }
 }

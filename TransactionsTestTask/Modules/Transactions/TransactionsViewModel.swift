@@ -12,23 +12,36 @@ class TransactionsViewModel {
     private var onAddTransactionTapped: (() -> Void)?
     private var cancellables = Set<AnyCancellable>()
     
-    @Published private(set) var transactions: [Transaction] = []
+    @Published private(set) var transactionsSections: [TransactionsSection] = []
     @Published private(set) var currentBalance: Double = 0
 
+    private var allTransactions: [Transaction] = []
+    private var loadedTransactions: [Transaction] = []
+    private var isFetching: Bool = false
+    
     init(dataService: DataService, onAddTransactionTapped: (() -> Void)?) {
         self.dataService = dataService
         self.onAddTransactionTapped = onAddTransactionTapped
     }
-
+    
     func fetchTransactions() {
-        Just(dataService.fetchTransactions())
-            .sink { [weak self] fetchedTransactions in
-                self?.transactions = fetchedTransactions
-            }
-            .store(in: &cancellables)
+        guard !isFetching else { return }
+        isFetching = true
         
-        currentBalance = dataService.currentBalance
+        let newTransactions = dataService.fetchTransactions(offset: loadedTransactions.count, limit: Constants.batchSize)
+        if newTransactions.count != 0 {
+            allTransactions.append(contentsOf: newTransactions)
+            loadedTransactions.append(contentsOf: newTransactions)
+            
+            let groupedTransactions = Dictionary(grouping: loadedTransactions, by: { Calendar.current.startOfDay(for: $0.date) })
+            transactionsSections = groupedTransactions.map { TransactionsSection(date: $0.key, transactions: $0.value) }
+                .sorted(by: { $0.date > $1.date })
+            currentBalance = dataService.currentBalance
+            
+            isFetching = false
+        }
     }
+
 
     func handleAddTransactionButtonTapped() {
         onAddTransactionTapped?()
@@ -44,5 +57,9 @@ class TransactionsViewModel {
         )
         dataService.saveTransaction(transaction)
         fetchTransactions()
+    }
+    
+    enum Constants {
+        static let batchSize = 20
     }
 }
