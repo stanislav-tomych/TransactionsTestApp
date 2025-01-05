@@ -35,6 +35,12 @@
 		758703A22D299AAC00FC4A6B /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 758703A12D299AAC00FC4A6B /* Localizable.xcstrings */; };
 		758703A42D2AA79E00FC4A6B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758703A32D2AA77900FC4A6B /* String.swift */; };
 		758703A62D2AB14800FC4A6B /* TransactionsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758703A52D2AB14200FC4A6B /* TransactionsSection.swift */; };
+		758703ED2D2ACA3900FC4A6B /* HTTPRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758703EC2D2ACA3300FC4A6B /* HTTPRepository.swift */; };
+		758703EF2D2ACA6000FC4A6B /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758703EE2D2ACA4300FC4A6B /* Endpoints.swift */; };
+		758703F12D2ACAED00FC4A6B /* BitcoinRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758703F02D2ACAEC00FC4A6B /* BitcoinRate.swift */; };
+		758703F32D2AD17600FC4A6B /* APIErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758703F22D2AD17600FC4A6B /* APIErrors.swift */; };
+		758703F52D2AD1F900FC4A6B /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758703F42D2AD1F300FC4A6B /* APIService.swift */; };
+		758703F82D2ADC7400FC4A6B /* RateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758703F72D2ADC7200FC4A6B /* RateView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +93,12 @@
 		758703A12D299AAC00FC4A6B /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		758703A32D2AA77900FC4A6B /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		758703A52D2AB14200FC4A6B /* TransactionsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsSection.swift; sourceTree = "<group>"; };
+		758703EC2D2ACA3300FC4A6B /* HTTPRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRepository.swift; sourceTree = "<group>"; };
+		758703EE2D2ACA4300FC4A6B /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
+		758703F02D2ACAEC00FC4A6B /* BitcoinRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitcoinRate.swift; sourceTree = "<group>"; };
+		758703F22D2AD17600FC4A6B /* APIErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrors.swift; sourceTree = "<group>"; };
+		758703F42D2AD1F300FC4A6B /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		758703F72D2ADC7200FC4A6B /* RateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,9 +138,11 @@
 		0DF1D13E2D22DC2D001626E7 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				758703872D29685700FC4A6B /* Storage */,
 				0DF1D1412D22DCC3001626E7 /* Helpers */,
-				0DF1D13F2D22DC4B001626E7 /* ServicesAssembler.swift */,
+				758703F42D2AD1F300FC4A6B /* APIService.swift */,
 				0DF1D1442D22DCFF001626E7 /* BitcoinRateService.swift */,
+				0DF1D13F2D22DC4B001626E7 /* ServicesAssembler.swift */,
 				0D15405F2D22EF3400D6D63F /* AnalyticsService */,
 			);
 			path = Services;
@@ -165,7 +179,6 @@
 			isa = PBXGroup;
 			children = (
 				758703962D29946600FC4A6B /* Helpers */,
-				758703872D29685700FC4A6B /* Storage */,
 				7587037C2D29567300FC4A6B /* Coordinators */,
 				7587037A2D29529100FC4A6B /* Networking */,
 				758703772D29523100FC4A6B /* Models */,
@@ -202,6 +215,7 @@
 		758703772D29523100FC4A6B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				758703F02D2ACAEC00FC4A6B /* BitcoinRate.swift */,
 				758703A52D2AB14200FC4A6B /* TransactionsSection.swift */,
 				758703892D296D1300FC4A6B /* Transaction.swift */,
 			);
@@ -219,6 +233,9 @@
 		7587037A2D29529100FC4A6B /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				758703F22D2AD17600FC4A6B /* APIErrors.swift */,
+				758703EE2D2ACA4300FC4A6B /* Endpoints.swift */,
+				758703EC2D2ACA3300FC4A6B /* HTTPRepository.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -226,6 +243,7 @@
 		7587037B2D29559900FC4A6B /* Transactions */ = {
 			isa = PBXGroup;
 			children = (
+				758703F62D2ADC6D00FC4A6B /* Views */,
 				758703942D29871800FC4A6B /* TransactionsViewModel.swift */,
 				1CA3B6592D22B0F500176711 /* TransactionsViewController.swift */,
 			);
@@ -286,6 +304,14 @@
 				758703A12D299AAC00FC4A6B /* Localizable.xcstrings */,
 			);
 			path = Localization;
+			sourceTree = "<group>";
+		};
+		758703F62D2ADC6D00FC4A6B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				758703F72D2ADC7200FC4A6B /* RateView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -428,7 +454,10 @@
 				0DF1D1452D22DD06001626E7 /* BitcoinRateService.swift in Sources */,
 				0DF1D1472D22DD4A001626E7 /* AnalyticsService.swift in Sources */,
 				7587039B2D29993C00FC4A6B /* Localization+Transactions.swift in Sources */,
+				758703F82D2ADC7400FC4A6B /* RateView.swift in Sources */,
 				1CA3B65A2D22B0F500176711 /* TransactionsViewController.swift in Sources */,
+				758703EF2D2ACA6000FC4A6B /* Endpoints.swift in Sources */,
+				758703F12D2ACAED00FC4A6B /* BitcoinRate.swift in Sources */,
 				7587038A2D296D1700FC4A6B /* Transaction.swift in Sources */,
 				1CA3B6562D22B0F500176711 /* AppDelegate.swift in Sources */,
 				758703912D29818600FC4A6B /* AddTransactionViewController.swift in Sources */,
@@ -440,9 +469,12 @@
 				7587038E2D296E0600FC4A6B /* PersistenceService.swift in Sources */,
 				758703A62D2AB14800FC4A6B /* TransactionsSection.swift in Sources */,
 				758703862D29611E00FC4A6B /* Coordinator.swift in Sources */,
+				758703F52D2AD1F900FC4A6B /* APIService.swift in Sources */,
 				1CA3B6602D22B0F500176711 /* TransactionsTestTask.xcdatamodeld in Sources */,
 				0DF1D1402D22DC51001626E7 /* ServicesAssembler.swift in Sources */,
 				7587038C2D296DDC00FC4A6B /* DataService.swift in Sources */,
+				758703ED2D2ACA3900FC4A6B /* HTTPRepository.swift in Sources */,
+				758703F32D2AD17600FC4A6B /* APIErrors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 class AddTransactionViewModel {
-    var dataService: DataService
+    var dataService: DataServiceProtocol
     var onTransactionAdded: (() -> Void)?
     
     @Published var amountText: String = ""
@@ -17,7 +17,7 @@ class AddTransactionViewModel {
     
     private var cancellables = Set<AnyCancellable>()
     
-    init(dataService: DataService, onTransactionAdded: (() -> Void)?) {
+    init(dataService: DataServiceProtocol, onTransactionAdded: (() -> Void)?) {
         self.dataService = dataService
         self.onTransactionAdded = onTransactionAdded
         

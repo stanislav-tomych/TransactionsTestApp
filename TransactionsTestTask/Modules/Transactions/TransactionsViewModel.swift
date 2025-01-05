@@ -8,20 +8,26 @@ import Combine
 import Foundation
 
 class TransactionsViewModel {
-    private let dataService: DataService
+    private let dataService: DataServiceProtocol
+    private let bitcoinRateService: BitcoinRateServiceProtocol
+
     private var onAddTransactionTapped: (() -> Void)?
     private var cancellables = Set<AnyCancellable>()
     
     @Published private(set) var transactionsSections: [TransactionsSection] = []
     @Published private(set) var currentBalance: Double = 0
+    @Published var bitcoinRate: String = "??"
 
     private var allTransactions: [Transaction] = []
     private var loadedTransactions: [Transaction] = []
     private var isFetching: Bool = false
-    
-    init(dataService: DataService, onAddTransactionTapped: (() -> Void)?) {
+
+    init(dataService: DataServiceProtocol, bitcoinRateService: BitcoinRateServiceProtocol,  onAddTransactionTapped: (() -> Void)?) {
         self.dataService = dataService
         self.onAddTransactionTapped = onAddTransactionTapped
+        self.bitcoinRateService = bitcoinRateService
+        bindToBitcoinRateService()
+        bitcoinRateService.startFetchingRates()
     }
     
     func fetchTransactions() {
@@ -42,7 +48,19 @@ class TransactionsViewModel {
         }
     }
 
-
+    private func bindToBitcoinRateService() {
+        bitcoinRateService.currentRatePublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] rate in
+                if let rate = rate {
+                    self?.bitcoinRate = String(format: "$%.4f", rate)
+                } else {
+                    self?.bitcoinRate = "??"
+                }
+            }
+            .store(in: &cancellables)
+    }
+    
     func handleAddTransactionButtonTapped() {
         onAddTransactionTapped?()
     }
@@ -59,7 +77,11 @@ class TransactionsViewModel {
         fetchTransactions()
     }
     
-    enum Constants {
+    private enum Constants {
         static let batchSize = 20
+    }
+    
+    deinit {
+        bitcoinRateService.stopFetchingRates()
     }
 }

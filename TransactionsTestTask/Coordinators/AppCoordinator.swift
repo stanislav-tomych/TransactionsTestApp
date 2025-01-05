@@ -10,7 +10,7 @@ import UIKit
 class AppCoordinator: Coordinator {
     private let window: UIWindow
     private var navigationController: UINavigationController?
-    private var dataService: DataService = PersistenceService()
+    private var dataService: DataServiceProtocol = PersistenceService()
     private var transactionsCoordinator: TransactionsCoordinator?
     
     init(window: UIWindow) {

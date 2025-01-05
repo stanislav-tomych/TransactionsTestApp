@@ -9,18 +9,24 @@ import UIKit
 
 class TransactionsCoordinator: Coordinator {
     private let navigationController: UINavigationController
-    private var dataService: DataService
-    
+    private var dataService: DataServiceProtocol
+    private var bitcoinRateService: BitcoinRateServiceProtocol
+    private var apiService: APIServiceProtocol
+
     private var transactionsViewController: TransactionsViewController?
     private var addTransactionViewController: AddTransactionViewController?
 
-    init(navigationController: UINavigationController, dataService: DataService) {
+    init(navigationController: UINavigationController, dataService: DataServiceProtocol) {
         self.navigationController = navigationController
         self.dataService = dataService
+        
+        let httpRepository = HTTPRepository()
+        self.apiService = APIService(httpRepository: httpRepository)
+        self.bitcoinRateService = BitcoinRateService(apiService: apiService, refreshInterval: 10)
     }
 
     func start() {
-        let transactionViewModel = TransactionsViewModel(dataService: dataService) { [weak self] in
+        let transactionViewModel = TransactionsViewModel(dataService: dataService, bitcoinRateService: bitcoinRateService) { [weak self] in
             self?.showAddTransaction()
         }
         let transactionsViewController = TransactionsViewController(viewModel: transactionViewModel)

@@ -10,6 +10,8 @@ import Combine
 class TransactionsViewController: UIViewController {
     private let viewModel: TransactionsViewModel
     private var cancellables = Set<AnyCancellable>()
+  
+    private let bitcoinRateView = BitcoinRateView()
 
     private let balanceLabel: UILabel = {
         let label = UILabel()
@@ -62,6 +64,7 @@ class TransactionsViewController: UIViewController {
     private func setupUI() {
         title = Localization.Transactions.navigationTitle
         view.backgroundColor = .white
+        view.addSubview(bitcoinRateView)
         view.addSubview(balanceLabel)
         view.addSubview(addBalanceButton)
         view.addSubview(addTransactionButton)
@@ -75,9 +78,14 @@ class TransactionsViewController: UIViewController {
         balanceLabel.translatesAutoresizingMaskIntoConstraints = false
         addBalanceButton.translatesAutoresizingMaskIntoConstraints = false
         addTransactionButton.translatesAutoresizingMaskIntoConstraints = false
+        bitcoinRateView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            balanceLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.spacing),
+            bitcoinRateView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            bitcoinRateView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            bitcoinRateView.heightAnchor.constraint(equalToConstant: 50),
+            
+            balanceLabel.topAnchor.constraint(equalTo: bitcoinRateView.bottomAnchor, constant: 10),
             balanceLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 
             addBalanceButton.topAnchor.constraint(equalTo: balanceLabel.bottomAnchor, constant: Constants.spacing / 2),
@@ -102,11 +110,12 @@ class TransactionsViewController: UIViewController {
         viewModel.$currentBalance
             .receive(on: DispatchQueue.main)
             .sink { [weak self] balance in
-                UIView.transition(with: self?.balanceLabel ?? UILabel(),
-                                  duration: 0.3,
+                guard let self else { return }
+                UIView.transition(with: self.balanceLabel,
+                                  duration: Constants.animationLength,
                                   options: .transitionCrossDissolve,
                                   animations: {
-                    self?.balanceLabel.text = String(format: "%.2f BTC", balance)
+                    self.balanceLabel.text = String(format: "%.4f BTC", balance)
                 }, completion: nil)
             }
             .store(in: &cancellables)
@@ -115,6 +124,12 @@ class TransactionsViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.tableView.reloadData()
+            }
+            .store(in: &cancellables)
+        
+        viewModel.$bitcoinRate
+            .sink { [weak self] rate in
+                self?.bitcoinRateView.updateRate(rate)
             }
             .store(in: &cancellables)
     }
@@ -154,6 +169,7 @@ class TransactionsViewController: UIViewController {
     
     private enum Constants {
         static let spacing: CGFloat = 20
+        static let animationLength = 0.3
     }
 }
 
