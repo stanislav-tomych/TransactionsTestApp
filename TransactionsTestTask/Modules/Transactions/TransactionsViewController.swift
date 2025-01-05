@@ -58,7 +58,7 @@ class TransactionsViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.fetchTransactions()
+        viewModel.fetchTransactions(refetchAll: true)
     }
     
     private func setupUI() {

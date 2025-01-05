@@ -18,9 +18,8 @@ class TransactionsViewModel {
     @Published private(set) var currentBalance: Double = 0
     @Published var bitcoinRate: String = "??"
 
-    private var allTransactions: [Transaction] = []
     private var loadedTransactions: [Transaction] = []
-    private var isFetching: Bool = false
+    private var blockFetching: Bool = false
 
     init(dataService: DataServiceProtocol, bitcoinRateService: BitcoinRateServiceProtocol,  onAddTransactionTapped: (() -> Void)?) {
         self.dataService = dataService
@@ -30,13 +29,17 @@ class TransactionsViewModel {
         bitcoinRateService.startFetchingRates()
     }
     
-    func fetchTransactions() {
-        guard !isFetching else { return }
-        isFetching = true
+    func fetchTransactions(refetchAll: Bool = false) {
+        if refetchAll {
+            loadedTransactions = []
+            blockFetching = false
+        }
+        
+        guard !blockFetching else { return }
+        blockFetching = true
         
         let newTransactions = dataService.fetchTransactions(offset: loadedTransactions.count, limit: Constants.batchSize)
         if newTransactions.count != 0 {
-            allTransactions.append(contentsOf: newTransactions)
             loadedTransactions.append(contentsOf: newTransactions)
             
             let groupedTransactions = Dictionary(grouping: loadedTransactions, by: { Calendar.current.startOfDay(for: $0.date) })
@@ -44,7 +47,7 @@ class TransactionsViewModel {
                 .sorted(by: { $0.date > $1.date })
             currentBalance = dataService.currentBalance
             
-            isFetching = false
+            blockFetching = false
         }
     }
 
@@ -74,7 +77,7 @@ class TransactionsViewModel {
             type: .adjunction
         )
         dataService.saveTransaction(transaction)
-        fetchTransactions()
+        fetchTransactions(refetchAll: true)
     }
     
     private enum Constants {

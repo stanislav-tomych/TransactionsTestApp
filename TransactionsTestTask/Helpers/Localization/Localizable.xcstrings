@@ -51,6 +51,16 @@
         }
       }
     },
+    "Transactions.BitcoinView.Title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bitcoin Rate:"
+          }
+        }
+      }
+    },
     "Transactions.FillBalanceAlert.Placeholder" : {
       "localizations" : {
         "en" : {

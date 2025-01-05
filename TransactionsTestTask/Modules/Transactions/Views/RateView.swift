@@ -10,7 +10,7 @@ import UIKit
 class BitcoinRateView: UIView {
     private let bitcoinRateLabel: UILabel = {
         let label = UILabel()
-        label.text = "Bitcoin rate:"
+        label.text = Localization.Transactions.bitcoinViewTitle
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         return label
     }()
