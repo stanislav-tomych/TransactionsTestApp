@@ -42,7 +42,24 @@ The BitcoinRateService periodically fetches the latest Bitcoin-to-USD exchange r
   
 ## Testing
  - Unit Tests: Comprehensive unit tests cover the Network layer, ViewModels, and Models and Utils to ensure code reliability and facilitate future refactoring.
- 
+
+## Analytics Service
+The AnalyticsService tracks critical user actions within the app, enabling monitoring and understanding of user behavior. Only significant events, such as successfully completed actions, are logged to ensure relevant and actionable insights.
+
+###Event Tracking:
+- Logs key events such as transactions, balance updates, and Bitcoin rate updates.
+- Avoids logging redundant lifecycle events or button clicks for clarity.
+
+###Event Parameters:
+- Captures details such as transaction ID, amount, category, and date for contextualized analysis.
+### Event Filtering:
+- Allows querying of logged events by name and date range for targeted insights.
+### Event Types:
+- transaction: Logged when a transaction is successfully added.
+- adjuction: Tracks balance additions.
+- balanceUpdate: Reflects changes to the user's balance.
+- rateUpdate: Captures Bitcoin-to-USD rate updates.
+- transactionsPageLoaded: Logged when a page of transactions is successfully loaded.
  
 # Features
 
@@ -57,7 +74,7 @@ Integrated at the top of the Transactions Screen Bitcoin Rate View, showing the 
 Updates automatically every few minutes with a fallback to cached rates when offline.
 Designed to blend seamlessly with the app's navigation bar for consistent UI aesthetics.
 
-Add Transaction Screen:
+- Add Transaction Screen:
 Allows the user to input a transaction amount and select a category (e.g., Groceries, Taxi, etc.).
 Includes form validation to ensure a valid amount is entered before submission.
 On successful submission, the user is redirected back to the Transactions Screen, where the new transaction appears.
