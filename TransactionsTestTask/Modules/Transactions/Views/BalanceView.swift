@@ -25,7 +25,7 @@ final class BalanceView: UIView {
 
     private let addTransactionButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Add Transaction", for: .normal)
+        button.setTitle(Localization.Transactions.addTransaction, for: .normal)
         return button
     }()
 

@@ -51,6 +51,16 @@
         }
       }
     },
+    "Transactions.addTransaction" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add Transaction"
+          }
+        }
+      }
+    },
     "Transactions.BitcoinView.Title" : {
       "localizations" : {
         "en" : {

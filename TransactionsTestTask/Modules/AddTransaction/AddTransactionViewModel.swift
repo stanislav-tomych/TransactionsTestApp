@@ -10,6 +10,7 @@ import Combine
 
 final class AddTransactionViewModel {
     var dataService: DataServiceProtocol
+    var analyticsService: AnalyticsServiceProtocol
     var onTransactionAdded: (() -> Void)?
     
     @Published var amountText: String = ""
@@ -17,8 +18,9 @@ final class AddTransactionViewModel {
     
     private var cancellables = Set<AnyCancellable>()
     
-    init(dataService: DataServiceProtocol, onTransactionAdded: (() -> Void)?) {
+    init(dataService: DataServiceProtocol, analyticsService: AnalyticsServiceProtocol, onTransactionAdded: (() -> Void)?) {
         self.dataService = dataService
+        self.analyticsService = analyticsService
         self.onTransactionAdded = onTransactionAdded
         
         isAddButtonEnabled = $amountText
@@ -40,6 +42,7 @@ final class AddTransactionViewModel {
             type: .expense
         )
         dataService.saveTransaction(transaction)
+        analyticsService.trackEvent(name: .transaction, parameters: [.transactionId : transaction.id, .amount: transaction.amount, .date: transaction.date, .category: transaction.category.toString()])
         onTransactionAdded?()
     }
 }

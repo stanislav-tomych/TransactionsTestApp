@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0D1540612D22EF5D00D6D63F /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1540602D22EF5D00D6D63F /* AnalyticsEvent.swift */; };
-		0DF1D1402D22DC51001626E7 /* ServicesAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF1D13F2D22DC4B001626E7 /* ServicesAssembler.swift */; };
 		0DF1D1452D22DD06001626E7 /* BitcoinRateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF1D1442D22DCFF001626E7 /* BitcoinRateService.swift */; };
 		0DF1D1472D22DD4A001626E7 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF1D1462D22DD44001626E7 /* AnalyticsService.swift */; };
 		1CA3B6562D22B0F500176711 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA3B6552D22B0F500176711 /* AppDelegate.swift */; };
@@ -64,7 +63,6 @@
 
 /* Begin PBXFileReference section */
 		0D1540602D22EF5D00D6D63F /* AnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
-		0DF1D13F2D22DC4B001626E7 /* ServicesAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesAssembler.swift; sourceTree = "<group>"; };
 		0DF1D1442D22DCFF001626E7 /* BitcoinRateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitcoinRateService.swift; sourceTree = "<group>"; };
 		0DF1D1462D22DD44001626E7 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
 		1CA3B6522D22B0F500176711 /* TransactionsTestTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TransactionsTestTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,10 +140,10 @@
 		0DF1D13E2D22DC2D001626E7 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				7587037A2D29529100FC4A6B /* Networking */,
 				758703872D29685700FC4A6B /* Storage */,
 				758703F42D2AD1F300FC4A6B /* APIService.swift */,
 				0DF1D1442D22DCFF001626E7 /* BitcoinRateService.swift */,
-				0DF1D13F2D22DC4B001626E7 /* ServicesAssembler.swift */,
 				0D15405F2D22EF3400D6D63F /* AnalyticsService */,
 			);
 			path = Services;
@@ -175,7 +173,6 @@
 			children = (
 				758703962D29946600FC4A6B /* Helpers */,
 				7587037C2D29567300FC4A6B /* Coordinators */,
-				7587037A2D29529100FC4A6B /* Networking */,
 				758703772D29523100FC4A6B /* Models */,
 				758703762D29522600FC4A6B /* Modules */,
 				0DF1D13E2D22DC2D001626E7 /* Services */,
@@ -470,7 +467,6 @@
 				758703F52D2AD1F900FC4A6B /* APIService.swift in Sources */,
 				758703FD2D2BEA8000FC4A6B /* TransactionsSectionHeader.swift in Sources */,
 				1CA3B6602D22B0F500176711 /* TransactionsTestTask.xcdatamodeld in Sources */,
-				0DF1D1402D22DC51001626E7 /* ServicesAssembler.swift in Sources */,
 				7587038C2D296DDC00FC4A6B /* DataService.swift in Sources */,
 				758703ED2D2ACA3900FC4A6B /* HTTPRepository.swift in Sources */,
 				758703FA2D2BDF1900FC4A6B /* BalanceView.swift in Sources */,

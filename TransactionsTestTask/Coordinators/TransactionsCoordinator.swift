@@ -9,33 +9,32 @@ import UIKit
 
 final class TransactionsCoordinator: Coordinator {
     private let navigationController: UINavigationController
+    
     private var dataService: DataServiceProtocol
     private var bitcoinRateService: BitcoinRateServiceProtocol
     private var apiService: APIServiceProtocol
+    private var analyticsService: AnalyticsServiceProtocol
 
-    private var transactionsViewController: TransactionsViewController?
-    private var addTransactionViewController: AddTransactionViewController?
-
-    init(navigationController: UINavigationController, dataService: DataServiceProtocol) {
+    init(navigationController: UINavigationController) {
         self.navigationController = navigationController
-        self.dataService = dataService
         
         let httpRepository = HTTPRepository()
         self.apiService = APIService(httpRepository: httpRepository)
         self.bitcoinRateService = BitcoinRateService(apiService: apiService, refreshInterval: 10)
+        self.dataService = PersistenceService()
+        self.analyticsService = AnalyticsService()
     }
 
     func start() {
-        let transactionViewModel = TransactionsViewModel(dataService: dataService, bitcoinRateService: bitcoinRateService) { [weak self] in
+        let transactionViewModel = TransactionsViewModel(dataService: dataService, bitcoinRateService: bitcoinRateService, analyticsService: analyticsService) { [weak self] in
             self?.showAddTransaction()
         }
         let transactionsViewController = TransactionsViewController(viewModel: transactionViewModel)
-        self.transactionsViewController = transactionsViewController
         navigationController.viewControllers = [transactionsViewController]
     }
     
     private func showAddTransaction() {
-        let viewModel = AddTransactionViewModel(dataService: dataService) { [weak self] in
+        let viewModel = AddTransactionViewModel(dataService: dataService, analyticsService: analyticsService) { [weak self] in
             self?.pop()
         }
         let addTransactionViewController = AddTransactionViewController(viewModel: viewModel)
