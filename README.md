@@ -46,11 +46,11 @@ The BitcoinRateService periodically fetches the latest Bitcoin-to-USD exchange r
 ## Analytics Service
 The AnalyticsService tracks critical user actions within the app, enabling monitoring and understanding of user behavior. Only significant events, such as successfully completed actions, are logged to ensure relevant and actionable insights.
 
-###Event Tracking:
+### Event Tracking:
 - Logs key events such as transactions, balance updates, and Bitcoin rate updates.
 - Avoids logging redundant lifecycle events or button clicks for clarity.
 
-###Event Parameters:
+### Event Parameters:
 - Captures details such as transaction ID, amount, category, and date for contextualized analysis.
 ### Event Filtering:
 - Allows querying of logged events by name and date range for targeted insights.
