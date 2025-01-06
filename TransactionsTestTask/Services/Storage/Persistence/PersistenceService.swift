@@ -18,16 +18,23 @@ final class PersistenceService: DataServiceProtocol {
         static let type = "type"
         static let balance = "balance"
     }
-
-    lazy var persistentContainer: NSPersistentContainer = {
+    
+    private let persistentContainer: NSPersistentContainer
+    
+    init(container: NSPersistentContainer) {
+        self.persistentContainer = container
+    }
+    
+    convenience init() {
         let container = NSPersistentContainer(name: "TransactionsTestTask")
         container.loadPersistentStores { _, error in
             if let error = error as NSError? {
                 fatalError("Unresolved error: \(error), \(error.userInfo)")
             }
         }
-        return container
-    }()
+        self.init(container: container)
+    }
+    
 
     var context: NSManagedObjectContext {
         persistentContainer.viewContext

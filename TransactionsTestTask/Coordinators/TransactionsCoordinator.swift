@@ -20,7 +20,7 @@ final class TransactionsCoordinator: Coordinator {
         
         let httpRepository = HTTPRepository()
         self.apiService = APIService(httpRepository: httpRepository)
-        self.bitcoinRateService = BitcoinRateService(apiService: apiService, refreshInterval: 10)
+        self.bitcoinRateService = BitcoinRateService(apiService: apiService, refreshInterval: Constants.bitcoinRefreshInterval)
         self.dataService = PersistenceService()
         self.analyticsService = AnalyticsService()
     }
@@ -43,5 +43,9 @@ final class TransactionsCoordinator: Coordinator {
     
     private func pop() {
         navigationController.popViewController(animated: true)
+    }
+    
+    private enum Constants {
+        static let bitcoinRefreshInterval = 120.0
     }
 }
