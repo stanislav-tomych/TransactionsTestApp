@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class AddTransactionViewController: UIViewController {
+final class AddTransactionViewController: UIViewController {
     private let viewModel: AddTransactionViewModel
 
     var selectedCategory: TransactionCategory = .groceries

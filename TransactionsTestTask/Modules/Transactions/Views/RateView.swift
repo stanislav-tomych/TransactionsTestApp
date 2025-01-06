@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BitcoinRateView: UIView {
+final class BitcoinRateView: UIView {
     private let bitcoinRateLabel: UILabel = {
         let label = UILabel()
         label.text = Localization.Transactions.bitcoinViewTitle

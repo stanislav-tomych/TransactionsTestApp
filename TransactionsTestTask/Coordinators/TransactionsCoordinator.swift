@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TransactionsCoordinator: Coordinator {
+final class TransactionsCoordinator: Coordinator {
     private let navigationController: UINavigationController
     private var dataService: DataServiceProtocol
     private var bitcoinRateService: BitcoinRateServiceProtocol

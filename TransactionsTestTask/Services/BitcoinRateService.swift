@@ -38,7 +38,7 @@ protocol BitcoinRateServiceProtocol {
     func stopFetchingRates()
 }
 
-class BitcoinRateService: BitcoinRateServiceProtocol {
+final class BitcoinRateService: BitcoinRateServiceProtocol {
     private let apiService: APIServiceProtocol
     private let userDefaults = UserDefaults.standard
     private var refreshInterval: TimeInterval

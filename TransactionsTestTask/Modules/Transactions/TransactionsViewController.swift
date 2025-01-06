@@ -7,32 +7,26 @@
 import UIKit
 import Combine
 
-class TransactionsViewController: UIViewController {
+final class TransactionsViewController: UIViewController {
     private let viewModel: TransactionsViewModel
     private var cancellables = Set<AnyCancellable>()
   
     private let bitcoinRateView = BitcoinRateView()
+    private let balanceView = BalanceView()
 
-    private let balanceLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        label.textAlignment = .center
-        label.text = "0.00 BTC"
-        return label
+    private lazy var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        return formatter
     }()
-
-    private let addBalanceButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Add BTC", for: .normal)
-        return button
+    
+    private lazy var timeFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .none
+        formatter.timeStyle = .medium
+        return formatter
     }()
-
-    private let addTransactionButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Add Transaction", for: .normal)
-        return button
-    }()
-
+    
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -65,36 +59,28 @@ class TransactionsViewController: UIViewController {
         title = Localization.Transactions.navigationTitle
         view.backgroundColor = .white
         view.addSubview(bitcoinRateView)
-        view.addSubview(balanceLabel)
-        view.addSubview(addBalanceButton)
-        view.addSubview(addTransactionButton)
+        view.addSubview(balanceView)
         view.addSubview(tableView)
 
+        tableView.register(TransactionTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(TransactionTableViewCell.self))
         tableView.dataSource = self
         tableView.delegate = self
     }
 
     private func setupConstraints() {
-        balanceLabel.translatesAutoresizingMaskIntoConstraints = false
-        addBalanceButton.translatesAutoresizingMaskIntoConstraints = false
-        addTransactionButton.translatesAutoresizingMaskIntoConstraints = false
+        balanceView.translatesAutoresizingMaskIntoConstraints = false
         bitcoinRateView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            bitcoinRateView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            bitcoinRateView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            bitcoinRateView.heightAnchor.constraint(equalToConstant: 50),
+            bitcoinRateView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
+            bitcoinRateView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Constants.spacing),
+            bitcoinRateView.heightAnchor.constraint(equalToConstant: Constants.rateViewHeight),
             
-            balanceLabel.topAnchor.constraint(equalTo: bitcoinRateView.bottomAnchor, constant: 10),
-            balanceLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            balanceView.topAnchor.constraint(equalTo: bitcoinRateView.bottomAnchor, constant: Constants.spacing),
+            balanceView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.spacing),
+            balanceView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.spacing),
 
-            addBalanceButton.topAnchor.constraint(equalTo: balanceLabel.bottomAnchor, constant: Constants.spacing / 2),
-            addBalanceButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-
-            addTransactionButton.topAnchor.constraint(equalTo: addBalanceButton.bottomAnchor, constant: Constants.spacing),
-            addTransactionButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-
-            tableView.topAnchor.constraint(equalTo: addTransactionButton.bottomAnchor, constant: Constants.spacing),
+            tableView.topAnchor.constraint(equalTo: balanceView.bottomAnchor, constant: Constants.spacing),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
@@ -102,21 +88,20 @@ class TransactionsViewController: UIViewController {
     }
 
     private func setupActions() {
-        addBalanceButton.addTarget(self, action: #selector(addBalanceTapped), for: .touchUpInside)
-        addTransactionButton.addTarget(self, action: #selector(addTransactionTapped), for: .touchUpInside)
+        balanceView.onAddBalanceTapped = { [weak self] in
+            self?.showAddBalanceAlert()
+        }
+
+        balanceView.onAddTransactionTapped = { [weak self] in
+            self?.viewModel.handleAddTransactionButtonTapped()
+        }
     }
 
     private func setupBindings() {
         viewModel.$currentBalance
             .receive(on: DispatchQueue.main)
             .sink { [weak self] balance in
-                guard let self else { return }
-                UIView.transition(with: self.balanceLabel,
-                                  duration: Constants.animationLength,
-                                  options: .transitionCrossDissolve,
-                                  animations: {
-                    self.balanceLabel.text = String(format: "%.4f BTC", balance)
-                }, completion: nil)
+                self?.balanceView.updateBalance(balance)
             }
             .store(in: &cancellables)
         
@@ -128,13 +113,14 @@ class TransactionsViewController: UIViewController {
             .store(in: &cancellables)
         
         viewModel.$bitcoinRate
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] rate in
                 self?.bitcoinRateView.updateRate(rate)
             }
             .store(in: &cancellables)
     }
 
-    @objc private func addBalanceTapped() {
+    private func showAddBalanceAlert() {
         let alertController = UIAlertController(
             title: Localization.Transactions.fillBalanceTitle,
             message: nil,
@@ -168,8 +154,10 @@ class TransactionsViewController: UIViewController {
     }
     
     private enum Constants {
-        static let spacing: CGFloat = 20
-        static let animationLength = 0.3
+        static let spacing: CGFloat = 8
+        static let rateViewHeight: CGFloat = 50
+        static let sectionHeaderHeight: CGFloat = 50.0
+        static let tableViewCellHeight: CGFloat = 70.0
     }
 }
 
@@ -181,22 +169,26 @@ extension TransactionsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.transactionsSections[section].transactions.count
     }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        return formatter.string(from: viewModel.transactionsSections[section].date)
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(TransactionTableViewCell.self), for: indexPath) as! TransactionTableViewCell
+        let transaction = viewModel.transactionsSections[indexPath.section].transactions[indexPath.row]
+        cell.configure(with: transaction, timeFormatter: timeFormatter)
+        return cell
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
-        let transaction = viewModel.transactionsSections[indexPath.section].transactions[indexPath.row]
-        
-        cell.textLabel?.text = "\(transaction.amount) BTC"
-        cell.textLabel?.textColor = transaction.type == .adjunction ? .black : .red
-        cell.detailTextLabel?.text = transaction.category.toString()
-        cell.selectionStyle = .none
-        return cell
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = TransactionsSectionHeader()
+        headerView.configure(with: dateFormatter.string(from: viewModel.transactionsSections[section].date))
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        Constants.sectionHeaderHeight
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        Constants.tableViewCellHeight
     }
 }
 

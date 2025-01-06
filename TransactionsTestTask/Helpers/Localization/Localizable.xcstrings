@@ -91,12 +91,32 @@
         }
       }
     },
+    "TransactionTypes.Adjunction" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adjunction"
+          }
+        }
+      }
+    },
     "TransactionTypes.Electronics" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Electronics"
+          }
+        }
+      }
+    },
+    "TransactionTypes.Expense" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Expense"
           }
         }
       }

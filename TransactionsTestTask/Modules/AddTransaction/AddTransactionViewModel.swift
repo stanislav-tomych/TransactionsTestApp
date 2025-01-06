@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class AddTransactionViewModel {
+final class AddTransactionViewModel {
     var dataService: DataServiceProtocol
     var onTransactionAdded: (() -> Void)?
     

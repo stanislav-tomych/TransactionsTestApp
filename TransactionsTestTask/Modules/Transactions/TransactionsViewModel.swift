@@ -7,7 +7,7 @@
 import Combine
 import Foundation
 
-class TransactionsViewModel {
+final class TransactionsViewModel {
     private let dataService: DataServiceProtocol
     private let bitcoinRateService: BitcoinRateServiceProtocol
 
@@ -81,7 +81,7 @@ class TransactionsViewModel {
     }
     
     private enum Constants {
-        static let batchSize = 20
+        static let batchSize: Int = 20
     }
     
     deinit {

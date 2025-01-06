@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AppCoordinator: Coordinator {
+final class AppCoordinator: Coordinator {
     private let window: UIWindow
     private var navigationController: UINavigationController?
     private var dataService: DataServiceProtocol = PersistenceService()

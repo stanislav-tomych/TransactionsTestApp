@@ -27,5 +27,8 @@ extension Localization {
         static let electronics = NSLocalizedString("TransactionTypes.Electronics", comment: "")
         static let restaurant = NSLocalizedString("TransactionTypes.Restaurant", comment: "")
         static let other = NSLocalizedString("TransactionTypes.Other", comment: "")
+        
+        static let adjunction = NSLocalizedString("TransactionTypes.Adjunction", comment: "")
+        static let expense = NSLocalizedString("TransactionTypes.Expense", comment: "")
     }
 }

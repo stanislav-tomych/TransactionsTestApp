@@ -33,6 +33,15 @@ enum TransactionCategory: Int16, CaseIterable, Codable {
 enum TransactionType: Int16, Codable {
     case expense = 0
     case adjunction = 1
+    
+    func toString() -> String {
+        switch self {
+        case .adjunction:
+            Localization.TransactionTypes.adjunction
+        case .expense:
+            Localization.TransactionTypes.expense
+        }
+    }
 }
 
 struct Transaction: Identifiable {
